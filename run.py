@@ -36,22 +36,19 @@ def show_status(word):
 
 
 def play():
-    global guessed
-    global missed
-    global lives
-    global game_complete
+    global guessed, missed, lives, game_complete
     while game_complete is False and lives > 0:
         guess = input("Guess a letter or the entire word: \n").lower()
         if len(guess) == 1 and guess.isalpha():
-            if guess in word and len(guessed) != len(word):
+            if guess in word and not len(guessed) == len(word)-1:
                 show_status(word)
                 print(f"Well done, {guess} is part of the word.")
                 guessed.append(guess)
                 print(f"Missed: {missed}")
                 print(f"Lives remaining: {lives}")
-            elif guess in word and len(guessed) == len(word):
+            elif guess in word and len(guessed) == len(word) - 1:
                 show_status(word)
-                print("Congratularions, you guessed the word")
+                print("Congratulations, you guessed the word")
                 game_complete = True
             elif guess not in word and lives != 1:
                 show_status(word)
@@ -76,6 +73,7 @@ def play():
             print(f"Lives remaining: {lives}")
 
         else:
+            show_status(word)
             print("Invalid input, only letters are accepted")
 
 
