@@ -69,7 +69,7 @@ def play():
                 show_status(word)
                 print("Congratulations! You guessed the word!")
                 game_complete = True
-        elif guess != word:
+        elif guess != word and guess.isalpha():
             show_status(word)
             print(f"Sorry, {guess} is not the correct word")
             lives -= 1
