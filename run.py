@@ -11,7 +11,8 @@ lives = 7
 guessed = []
 missed = []
 game_complete = False
-word = "able"
+word = "area"
+hidden = (len(word) * "_")
 
 
 def get_word():
@@ -32,20 +33,24 @@ def get_word():
 def show_status(word):
     os.system("clear")
     print(images[7-lives])
-    print(len(word) * "_ ")
+    print(hidden)
 
 
 def play():
-    global guessed, missed, lives, game_complete
+    global guessed, missed, lives, game_complete, hidden
     while game_complete is False and lives > 0:
         guess = input("Guess a letter or the entire word: \n").lower()
         if len(guess) == 1 and guess.isalpha():
             if guess in word and not len(guessed) == len(word) - 1:
+                occurences = findOccurrences(word, guess)
+                for index in occurences:
+                    hidden = hidden[:index] + guess + hidden[index + 1:]
                 show_status(word)
                 print(f"Well done, '{guess}' is part of the word!")
-                guessed.append(guess)
+                guessed.append(occurences)
                 print(f"Missed letters: {missed}")
                 print(f"Lives remaining: {lives}")
+                print(guessed)
             elif guess in word and len(guessed) == len(word) - 1:
                 show_status(word)
                 print(f"Congratulations, the correct word was '{word}'!")
@@ -75,6 +80,10 @@ def play():
         else:
             show_status(word)
             print("Invalid input, only letters are accepted")
+
+
+def findOccurrences(s, ch):
+    return [i for i, letter in enumerate(s) if letter == ch]
 
 
 def main():
