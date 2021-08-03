@@ -47,7 +47,9 @@ def play():
                     hidden = hidden[:index] + guess + hidden[index + 1:]
                 show_status(word)
                 print(f"Well done, '{guess}' is part of the word!")
-                guessed.append((guess) * len(occurences))
+                for occurence in occurences:
+                    for x in str(occurence):
+                        guessed.append(x)
                 print(f"Missed letters: {missed}")
                 print(f"Lives remaining: {lives}")
                 print(guessed)
