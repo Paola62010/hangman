@@ -71,7 +71,7 @@ def play():
         elif guess == word and guess.isalpha():
             if guess == word:
                 show_status(word)
-                print("Congratulations, the correct word was '{word}'!")
+                print(f"Congratulations, the correct word was '{word}'!")
                 game_complete = True
         elif guess != word and guess.isalpha():
             show_status(word)
