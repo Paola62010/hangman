@@ -42,12 +42,12 @@ def play():
         guess = input("Guess a letter or the entire word: \n").lower()
         if len(guess) == 1 and guess.isalpha():
             if guess in word and not len(guessed) == len(word) - 1:
-                occurences = findOccurrences(word, guess)
+                occurences = find_occurrences(word, guess)
                 for index in occurences:
                     hidden = hidden[:index] + guess + hidden[index + 1:]
                 show_status(word)
                 print(f"Well done, '{guess}' is part of the word!")
-                guessed.append(occurences)
+                guessed.append((guess) * len(occurences))
                 print(f"Missed letters: {missed}")
                 print(f"Lives remaining: {lives}")
                 print(guessed)
@@ -82,7 +82,7 @@ def play():
             print("Invalid input, only letters are accepted")
 
 
-def findOccurrences(s, ch):
+def find_occurrences(s, ch):
     return [i for i, letter in enumerate(s) if letter == ch]
 
 
