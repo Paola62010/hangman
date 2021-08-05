@@ -33,7 +33,9 @@ def get_word():
 def show_status(word):
     os.system("clear")
     print(images[7-lives])
+    print()
     print(hidden)
+    print()
 
 
 def play():
@@ -61,30 +63,36 @@ def play():
                 print(f"Congratulations, the correct word was '{word}'!")
                 game_complete = True
             elif guess not in word and lives != 1:
+                lives -= 1
                 show_status(word)
                 print(f"Sorry, '{guess}' is not part of the word. Try again.")
                 missed.append(guess)
-                lives -= 1
                 print(f"Missed letters: {missed}")
                 print(f"Lives remaining: {lives}")
             elif guess in guessed or guess in missed:
                 print(f"You already guessed letter '{guess}'', try again.")
             else:
+                lives -= 1
                 show_status(word)
                 print(f"Sorry, the correct word was '{word}'...")
-                game_complete = True
         elif guess in hidden or guess in missed:
-            print(f"Sorry, letter '{guess}' was already guessed, try again.")
+            print(f"Letter '{guess}' was already guessed, try again.")
         elif guess == word and guess.isalpha():
             if guess == word:
                 show_status(word)
                 print(f"Congratulations, the correct word was '{word}'!")
                 game_complete = True
         elif guess != word and guess.isalpha():
-            show_status(word)
-            print(f"Sorry, {guess} is not the correct word")
-            lives -= 1
-            print(f"Lives remaining: {lives}")
+            if lives != 1:
+                lives -= 1
+                show_status(word)
+                print(f"Sorry, '{guess}' is not the correct word")
+                print(f"Missed letters: {missed}")
+                print(f"Lives remaining: {lives}")
+            else:
+                lives -= 1
+                show_status(word)
+                print(f"Sorry, the correct word was '{word}'...")
 
         else:
             show_status(word)
