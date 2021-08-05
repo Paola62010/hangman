@@ -40,7 +40,8 @@ def play():
     global guessed, missed, lives, game_complete, hidden
     while game_complete is False and lives > 0:
         guess = input("Guess a letter or the entire word: \n").lower()
-        if len(guess) == 1 and guess.isalpha():
+        if (len(guess) == 1 and guess.isalpha() and guess not in guessed
+                and guess not in missed):
             if guess in word and not len(guessed) == len(word) - 1:
                 occurences = find_occurrences(word, guess)
                 for index in occurences:
@@ -54,6 +55,9 @@ def play():
                 print(f"Lives remaining: {lives}")
                 print(guessed)
             elif guess in word and len(guessed) == len(word) - 1:
+                occurences = find_occurrences(word, guess)
+                for index in occurences:
+                    hidden = hidden[:index] + guess + hidden[index + 1:]
                 show_status(word)
                 print(f"Congratulations, the correct word was '{word}'!")
                 game_complete = True
@@ -64,10 +68,14 @@ def play():
                 lives -= 1
                 print(f"Missed letters: {missed}")
                 print(f"Lives remaining: {lives}")
+            elif guess in guessed or guess in missed:
+                print(f"You already guessed letter '{guess}'', try again.")
             else:
                 show_status(word)
                 print(f"Sorry, the correct word was '{word}'...")
                 game_complete = True
+        elif guess in guessed or guess in missed:
+            print(f"Sorry, letter {guess} was already guessed, try again.")
         elif guess == word and guess.isalpha():
             if guess == word:
                 show_status(word)
