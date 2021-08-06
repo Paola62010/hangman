@@ -11,7 +11,7 @@ lives = 7
 guessed = []
 missed = []
 game_complete = False
-word = "area"
+word = ""
 hidden = (len(word) * "_")
 
 
@@ -37,6 +37,7 @@ def show_status(word):
     print()
     print(hidden)
     print()
+    print(word)
 
 
 def play():
@@ -111,7 +112,7 @@ def find_occurrences(s, ch):
 
 
 def new_game():
-    global lives, guessed, missed, game_complete, hidden
+    global lives, guessed, missed, game_complete, hidden, word
     print()
     play_again = input("Would you like to play again? (yes/no)\n").lower()
     if play_again == "yes":
@@ -119,8 +120,8 @@ def new_game():
         guessed = []
         missed = []
         game_complete = False
+        word = get_word()
         hidden = (len(word) * "_")
-        show_status(word)
         play()
     if play_again == "no":
         print("Thanks for playing!!")
@@ -133,10 +134,10 @@ def new_game():
 def main():
     print(hangman_title)
     print("Welcome to Hangman! Guess all the letters and reveal the word!\n")
-    #word = get_word()
+    word = get_word()
     show_status(word)
     play()
-    new_game()
+    #new_game()
 
 
 main()
