@@ -32,6 +32,7 @@ def get_word():
 
 def show_status(word):
     os.system("clear")
+    print(hangman_title)
     print(images[7-lives])
     print()
     print(hidden)
@@ -53,8 +54,10 @@ def play():
                 for occurence in occurences:
                     for x in str(occurence):
                         guessed.append(x)
+                print()
                 print(f"Missed letters: {missed}")
                 print(f"Lives remaining: {lives}")
+                print()
             elif guess in word and len(guessed) == len(word) - 1:
                 occurences = find_occurrences(word, guess)
                 for index in occurences:
@@ -67,8 +70,10 @@ def play():
                 show_status(word)
                 print(f"Sorry, '{guess}' is not part of the word. Try again.")
                 missed.append(guess)
+                print()
                 print(f"Missed letters: {missed}")
                 print(f"Lives remaining: {lives}")
+                print()
             elif guess in guessed or guess in missed:
                 print(f"You already guessed letter '{guess}'', try again.")
             else:
@@ -87,8 +92,10 @@ def play():
                 lives -= 1
                 show_status(word)
                 print(f"Sorry, '{guess}' is not the correct word")
+                print()
                 print(f"Missed letters: {missed}")
                 print(f"Lives remaining: {lives}")
+                print()
             else:
                 lives -= 1
                 show_status(word)
@@ -103,12 +110,33 @@ def find_occurrences(s, ch):
     return [i for i, letter in enumerate(s) if letter == ch]
 
 
+def new_game():
+    global lives, guessed, missed, game_complete, hidden
+    print()
+    play_again = input("Would you like to play again? (yes/no)\n").lower()
+    if play_again == "yes":
+        lives = 7
+        guessed = []
+        missed = []
+        game_complete = False
+        hidden = (len(word) * "_")
+        show_status(word)
+        play()
+    if play_again == "no":
+        print("Thanks for playing!!")
+        pass
+    else:
+        print("Input invalid. Please enter a valid option.")
+        new_game()
+
+
 def main():
     print(hangman_title)
     print("Welcome to Hangman! Guess all the letters and reveal the word!\n")
     #word = get_word()
     show_status(word)
     play()
+    new_game()
 
 
 main()
