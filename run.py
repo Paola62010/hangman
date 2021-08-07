@@ -12,7 +12,6 @@ guessed = []
 missed = []
 game_complete = False
 word = ""
-hidden = (len(word) * "_")
 
 
 def get_word():
@@ -30,7 +29,7 @@ def get_word():
     return word
 
 
-def show_status(word):
+def show_status(word, hidden):
     os.system("clear")
     print(hangman_title)
     print(images[7-lives])
@@ -40,8 +39,8 @@ def show_status(word):
     print(word)
 
 
-def play():
-    global guessed, missed, lives, game_complete, hidden
+def play(word, hidden):
+    global guessed, missed, lives, game_complete
     while game_complete is False and lives > 0:
         guess = input("Guess a letter or the entire word: \n").lower()
         if (len(guess) == 1 and guess.isalpha() and guess not in hidden
@@ -50,7 +49,7 @@ def play():
                 occurences = find_occurrences(word, guess)
                 for index in occurences:
                     hidden = hidden[:index] + guess + hidden[index + 1:]
-                show_status(word)
+                show_status(word, hidden)
                 print(f"Well done, '{guess}' is part of the word!")
                 for occurence in occurences:
                     for x in str(occurence):
@@ -63,12 +62,12 @@ def play():
                 occurences = find_occurrences(word, guess)
                 for index in occurences:
                     hidden = hidden[:index] + guess + hidden[index + 1:]
-                show_status(word)
+                show_status(word, hidden)
                 print(f"Congratulations, the correct word was '{word}'!")
                 game_complete = True
             elif guess not in word and lives != 1:
                 lives -= 1
-                show_status(word)
+                show_status(word, hidden)
                 print(f"Sorry, '{guess}' is not part of the word. Try again.")
                 missed.append(guess)
                 print()
@@ -79,19 +78,19 @@ def play():
                 print(f"You already guessed letter '{guess}'', try again.")
             else:
                 lives -= 1
-                show_status(word)
+                show_status(word, hidden)
                 print(f"Sorry, the correct word was '{word}'...")
         elif guess in hidden or guess in missed:
             print(f"Letter '{guess}' was already guessed, try again.")
         elif guess == word and guess.isalpha():
             if guess == word:
-                show_status(word)
+                show_status(word, hidden)
                 print(f"Congratulations, the correct word was '{word}'!")
                 game_complete = True
         elif guess != word and guess.isalpha():
             if lives != 1:
                 lives -= 1
-                show_status(word)
+                show_status(word, hidden)
                 print(f"Sorry, '{guess}' is not the correct word")
                 print()
                 print(f"Missed letters: {missed}")
@@ -99,11 +98,11 @@ def play():
                 print()
             else:
                 lives -= 1
-                show_status(word)
+                show_status(word, hidden)
                 print(f"Sorry, the correct word was '{word}'...")
 
         else:
-            show_status(word)
+            show_status(word, hidden)
             print("Invalid input, only letters are accepted")
 
 
@@ -135,8 +134,9 @@ def main():
     print(hangman_title)
     print("Welcome to Hangman! Guess all the letters and reveal the word!\n")
     word = get_word()
-    show_status(word)
-    play()
+    hidden = (len(word) * "_")
+    show_status(word, hidden)
+    play(word, hidden)
     #new_game()
 
 
