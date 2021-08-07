@@ -136,7 +136,7 @@ def find_occurrences(s, ch):
 
 
 def new_game():
-    global lives, guessed, missed, game_complete, hidden, word
+    global lives, guessed, missed, game_complete
     print()
     play_again = input("Would you like to play again? (yes/no)\n").lower()
     if play_again == "yes":
@@ -146,12 +146,14 @@ def new_game():
         game_complete = False
         word = get_word()
         hidden = (len(word) * "_")
+        show_status(word, hidden)
         play(word, hidden)
+        new_game()
     if play_again == "no":
         print("Thanks for playing!!")
-        pass
+        raise SystemExit
     else:
-        print("Input invalid. Please enter a valid option.")
+        print("Input invalid. Please enter a valid option...")
         new_game()
 
 
@@ -162,7 +164,7 @@ def main():
     hidden = (len(word) * "_")
     show_status(word, hidden)
     play(word, hidden)
-    #new_game()
+    new_game()
 
 
 main()
