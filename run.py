@@ -16,7 +16,7 @@ word = ""
 
 def get_word():
     global word
-    difficulty = input("Select game difficulty: easy, medium, hard:\n")
+    difficulty = input("Select game difficulty: easy, medium, hard:\n").lower()
     if difficulty == "easy":
         word = random.choice(easy_words)
     elif difficulty == "medium":
@@ -64,6 +64,10 @@ def play(word, hidden):
                     hidden = hidden[:index] + guess + hidden[index + 1:]
                 show_status(word, hidden)
                 print(f"Congratulations, the correct word was '{word}'!")
+                print()
+                print(f"Missed letters: {missed}")
+                print(f"Lives remaining: {lives}")
+                print()
                 game_complete = True
             elif guess not in word and lives != 1:
                 lives -= 1
@@ -80,6 +84,10 @@ def play(word, hidden):
                 lives -= 1
                 show_status(word, hidden)
                 print(f"Sorry, the correct word was '{word}'...")
+                print()
+                print(f"Missed letters: {missed}")
+                print(f"Lives remaining: {lives}")
+                print()
         elif guess in hidden or guess in missed:
             show_status(word, hidden)
             print(f"Letter '{guess}' was already guessed, try again.")
@@ -91,6 +99,10 @@ def play(word, hidden):
             if guess == word:
                 show_status(word, hidden)
                 print(f"Congratulations, the correct word was '{word}'!")
+                print()
+                print(f"Missed letters: {missed}")
+                print(f"Lives remaining: {lives}")
+                print()
                 game_complete = True
         elif guess != word and guess.isalpha():
             if lives != 1:
@@ -105,10 +117,18 @@ def play(word, hidden):
                 lives -= 1
                 show_status(word, hidden)
                 print(f"Sorry, the correct word was '{word}'...")
+                print()
+                print(f"Missed letters: {missed}")
+                print(f"Lives remaining: {lives}")
+                print()
 
         else:
             show_status(word, hidden)
-            print("Invalid input, only letters are accepted")
+            print("Invalid input, only letters are accepted...")
+            print()
+            print(f"Missed letters: {missed}")
+            print(f"Lives remaining: {lives}")
+            print()
 
 
 def find_occurrences(s, ch):
@@ -126,7 +146,7 @@ def new_game():
         game_complete = False
         word = get_word()
         hidden = (len(word) * "_")
-        play()
+        play(word, hidden)
     if play_again == "no":
         print("Thanks for playing!!")
         pass
