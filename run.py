@@ -36,7 +36,6 @@ def show_status(word, hidden):
     print()
     print(hidden)
     print()
-    print(word)
 
 
 def play(word, hidden):
@@ -97,6 +96,7 @@ def play(word, hidden):
             print()
         elif guess == word and guess.isalpha():
             if guess == word:
+                hidden = word
                 show_status(word, hidden)
                 print(f"Congratulations, the correct word was '{word}'!")
                 print()
