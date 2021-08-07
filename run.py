@@ -81,7 +81,12 @@ def play(word, hidden):
                 show_status(word, hidden)
                 print(f"Sorry, the correct word was '{word}'...")
         elif guess in hidden or guess in missed:
+            show_status(word, hidden)
             print(f"Letter '{guess}' was already guessed, try again.")
+            print()
+            print(f"Missed letters: {missed}")
+            print(f"Lives remaining: {lives}")
+            print()
         elif guess == word and guess.isalpha():
             if guess == word:
                 show_status(word, hidden)
