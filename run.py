@@ -98,7 +98,7 @@ def play(word, hidden):
                 print(f"Lives remaining: {lives}")
                 print()
         # Guess is a letter that was already guessed
-        elif guess in hidden or guess in missed:
+        elif guess.isalpha() and guess in hidden or guess in missed:
             show_status(word, hidden)
             print(f"Letter '{guess}' was already guessed, try again.")
             print()
