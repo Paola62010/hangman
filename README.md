@@ -1,45 +1,24 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# Hangman
 
-Welcome Paola62010,
+Hangman is a Python terminal game that runs on Code Institute mock terminal on Heroku.
 
-This is the Code Institute student template for Gitpod. We have preinstalled all of the tools you need to get started. You can safely delete this README.md file, or change it for your own project. Please do read it at least once, though! It contains some important information about Gitpod and the extensions we use.
+This classic game will bring you back in time, to when we used to play it on paper.
 
-## Gitpod Reminders
+![Mockup](assets/images/mockup.png)
 
-To run a frontend (HTML, CSS, Javascript only) application in Gitpod, in the terminal, type:
+[View deployed site here](https://paolas-hangman.herokuapp.com/)
 
-`python3 -m http.server`
+## How to play
 
-A blue button should appear to click: *Make Public*,
+The aim of the game is to guess the hidden word. The word to guess is represented by a row of dashes, each one replacing a letter of the word. 
 
-Another blue button should appear to click: *Open Browser*.
+With each turn the player can either guess the entire word or a letter. If the guess is correct, the dash will be replaced with the gussed letter. 
 
-To run a backend Python file, type `python3 app.py`, if your Python file is named `app.py` of course.
+The player has 7 lives. With each incorrect guess, one life is subtracted and one element of the hangman stick figure is drawn. 
 
-A blue button should appear to click: *Make Public*,
+The game ends when either the player guesses the word or no more lives remain. 
 
-Another blue button should appear to click: *Open Browser*.
+You can read more on the hangman game [here](https://en.wikipedia.org/wiki/Hangman_(game)).
 
-In Gitpod you have superuser security privileges by default. Therefore you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the lessons.
+## Features 
 
-## Updates Since The Instructional Video
-
-We continually tweak and adjust this template to help give you the best experience. Here is the version history:
-
-**October 21 2020:** Versions of the HTMLHint, Prettier, Bootstrap4 CDN and Auto Close extensions updated. The Python extension needs to stay the same version for now.
-
-**October 08 2020:** Additional large Gitpod files (`core.mongo*` and `core.python*`) are now hidden in the Explorer, and have been added to the `.gitignore` by default.
-
-**September 22 2020:** Gitpod occasionally creates large `core.Microsoft` files. These are now hidden in the Explorer. A `.gitignore` file has been created to make sure these files will not be committed, along with other common files.
-
-**April 16 2020:** The template now automatically installs MySQL instead of relying on the Gitpod MySQL image. The message about a Python linter not being installed has been dealt with, and the set-up files are now hidden in the Gitpod file explorer.
-
-**April 13 2020:** Added the _Prettier_ code beautifier extension instead of the code formatter built-in to Gitpod.
-
-**February 2020:** The initialisation files now _do not_ auto-delete. They will remain in your project. You can safely ignore them. They just make sure that your workspace is configured correctly each time you open it. It will also prevent the Gitpod configuration popup from appearing.
-
-**December 2019:** Added Eventyret's Bootstrap 4 extension. Type `!bscdn` in a HTML file to add the Bootstrap boilerplate. Check out the <a href="https://github.com/Eventyret/vscode-bcdn" target="_blank">README.md file at the official repo</a> for more options.
-
---------
-
-Happy coding!

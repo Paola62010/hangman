@@ -19,7 +19,7 @@ def get_word():
     Gets a random word based on the difficulty chosen
     """
     global word
-    difficulty = input("Select game difficulty: easy, medium, hard:\n").lower()
+    difficulty = input("Select game difficulty (easy, medium, hard):\n").lower()
     if difficulty == "easy":
         word = random.choice(easy_words)
     elif difficulty == "medium":
@@ -121,7 +121,7 @@ def play(word, hidden):
             if lives != 1:
                 lives -= 1
                 show_status(word, hidden)
-                print(f"Sorry, '{guess}' is not the correct word")
+                print(f"Sorry, '{guess}' is not the correct word...")
                 print()
                 print(f"Missed letters: {missed}")
                 print(f"Lives remaining: {lives}")
