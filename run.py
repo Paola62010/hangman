@@ -164,7 +164,7 @@ def new_game():
         missed = []
         game_complete = False
         word = get_word()
-        hidden = (len(word) * "_")
+        hidden = (len(word) * "-")
         show_status(word, hidden)
         play(word, hidden)
         new_game()
@@ -183,7 +183,7 @@ def main():
     print(hangman_title)
     print("Welcome to Hangman! Guess all the letters and reveal the word!\n")
     word = get_word()
-    hidden = (len(word) * "_")
+    hidden = (len(word) * "-")
     show_status(word, hidden)
     play(word, hidden)
     new_game()
