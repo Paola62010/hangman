@@ -19,7 +19,7 @@ def get_word():
     Gets a random word based on the difficulty chosen
     """
     global word
-    difficulty = input("Select game difficulty (easy, medium, hard):\n").lower()
+    difficulty = input("Pick game difficulty (easy, medium, hard):\n").lower()
     if difficulty == "easy":
         word = random.choice(easy_words)
     elif difficulty == "medium":
