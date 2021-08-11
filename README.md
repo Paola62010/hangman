@@ -20,6 +20,12 @@ The game ends when either the player guesses the word or no more lives remain.
 
 You can read more on the hangman game [here](https://en.wikipedia.org/wiki/Hangman_(game)).
 
+## Game Diagram
+
+I have created the following diagram to help me visualise how the game would work and the necessary steps to take.
+
+![Diagram](assets/images/hangman.png)
+
 ## Features 
 
 ### Existing Features
@@ -71,11 +77,11 @@ You can read more on the hangman game [here](https://en.wikipedia.org/wiki/Hangm
 ### Features to Implement in future
 
 
-1. As a future feature, it would be nice to also show the user with a list of incorrect words guessed other than only the incorrect letters. At the moment if the user guesses an entire word and the guess is incorrect, a live is correctly subtracted, but the user won't be able to see all the incorrect guessed (for entire word).
+1. As a future feature, it would be nice to also show the user a list of incorrect words guessed other than only the incorrect letters. At the moment if the user guesses an entire word and the guess is incorrect, a life is correctly subtracted, but the user won't be able to see all the incorrect guesses (for entire word).
 
-2. I would also like to add a scoreboard where the player can see their score. 
+2. I would also like to add a scoreboard where the player can see their scores. 
 
-3. Add additional words for each game difficulty level, and maybe add different categories for the words (movies, nature, food, etc.)
+3. Add additional words for each game difficulty level, and maybe add different categories for the words to pick from (movies, nature, food, etc.)
 
 ## Technologies Used
 
@@ -87,9 +93,9 @@ You can read more on the hangman game [here](https://en.wikipedia.org/wiki/Hangm
 
 The game has been thoroughly tested by following these steps:
 
-- Enter incorrect input for game difficulty, or simply click enter, and verify that a message is returned that advises the user to use one of the valid options. 
+- Enter incorrect input for game difficulty, or simply click enter, and verify that a message is returned that advises the player to use one of the valid options. 
 
-- Enter game difficulty and make sure that the hidden word is displayed correctly: 4 character word for the easy level, 6 characters for the medium level and 8 characters for the hard level.
+- Enter game difficulty and make sure that the hidden word is displayed correctly: 4 character word for the easy level (4 dashes), 6 characters for the medium level (6 dashes) and 8 characters for the hard level (8 dashes).
 
 - Make sure that the first image shown after selecting the difficulty level is the woodwork. 
 
@@ -109,9 +115,9 @@ The game has been thoroughly tested by following these steps:
 
 - When guessing a letter and the guess is incorrect: 
 
-    - Check that a live is correctly subtracted after each incorrect guess.
+    - Check that a life is correctly subtracted after each incorrect guess.
 
-    - Ensure that the image changes to show the nex component of the hangman figure. 
+    - Ensure that the image changes to show the correct next component of the hangman figure. 
 
     - Ensure that the incorrect letter is added to the "Missed letters" list. 
 
@@ -123,7 +129,9 @@ The game has been thoroughly tested by following these steps:
 
 - When the user has no more lives remaining, verify that:
 
-    - Correct feedback message is shown to let them know what the correct word was. 
+    - Correct feedback message is shown to let them know what the correct word was.
+
+    - Complete hangman stick figure is drawn.  
 
     - User is presented with the option to start a new game. 
 
@@ -141,6 +149,21 @@ The game has been thoroughly tested by following these steps:
 
     - After entering "no", verify that a thank you message is returned.  
 
+## Bugs
+
+1. One of the main bugs I encountered was that the "guessed" list (containing all the correct guesses from the player) was not getting updated correctly in case of multiple occurrencies of the same letter in the word. The letter was only added once instead of multiple times. This resulted in the game not ending as expected when the player guessed all the letters, additional attempts were needed. 
+Tutor Scott from Code Institute helped me by correcting my code for lines 63, 64 and 65, the for loop I wrote was incorrect and was causing the issue. 
+
+2. Another bug I encountered was related incorrect message returned in the scenario where the user presses enter without entering a letter or word for their guess. This was taken care of by correcting line of code 101 and adding "guess.isalpha()".
+
+3. The hangman stick figure was not being drawn correctly after the first incorrect guess. I then realised that my images.py file was actually missing one of the images for the game to work properly so I have added one (8 images as opposed to 7). 
+
+4. A small bug was that the game title was not showing correctly on the emulator on Heroku while displaying correctly on the Gitpod terminal. I have replaced the title with one of a different format which is showing fine on Heroku. I have kept the original title in the images.py file ("hangmantitle") as I might want to go back to that in future. 
+
+## Remaining bugs
+
+1. This is not really a bug but more of a small issue on the mock terminal. While os.system("clear") in function show_status appears to be working with no issues in the Gitpod terminal, this is not working on the emulator on Heroku and the terminal is not cleared as it would be expected. This means that if you scroll up the page after your first input, you will see the previous commands.
+Having said this, all the information is clearly visible on Heroku as well, the game functionality and player experience does not seem impacted, so I have decided that for now there is no immediate need to address this issue.   
 
 ## Validator Testing 
 
@@ -179,7 +202,7 @@ Additional information on how to clone a Github repository can be found [here](h
 
 ### Deploying to Heroku
 
-To deply to Heroku follow these steps: 
+To deploy to Heroku follow these steps: 
 
 1. Log into [Heroku](https://dashboard.heroku.com/apps) and locate the "New" button, on the top right end side of your dashboard page. 
 2. Click on "Create new app", select your region and pick a name for your project. 
@@ -198,6 +221,14 @@ https://stackoverflow.com/questions/61964490/how-to-replace-dash-with-letter-han
 
 - Lines of code 63, 64 and 65 were provided by tutor Scott from Code Institute. Thank you Scott for helping me on this. The issue I was having was that the guessed letters were not being added correctly to the "guessed" list in case of multiple occurrencies of the same letter in the word. 
 
+- I have taken the images for the hangman stick figure from the following github page: 
+
+https://gist.github.com/chrishorton/8510732aa9a80a03c829b09f12e20d9c
+
 - Code Institute for the deployment terminal. 
 
 - [Wikipedia](https://www.wikipedia.org/) for the details of the hangman game.  
+
+### Acknowledgements
+
+Thank you to Code Institute and the tutors for putting up with my questions and pointing me in the right direction. A special thank you to tutor Scott. 
